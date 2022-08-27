@@ -28,6 +28,8 @@ instance.interceptors.response.use(
 
     return res.data
   }, error => {
+    // 关闭loading效果
+    store.commit('hide')
     return Promise.reject(error)
   }
 )

@@ -1,7 +1,10 @@
 <template>
   <div class="login">
-    <Input v-model="userName" placeholder="请输入用户名(默认admin)" style="width: 300px"></Input>
-    <div class="buttonContainer"><Button type="primary">登录</Button></div>
+    <Spin v-if="$store.state.isShowLoading">加载中...</Spin>
+    <div v-else>
+      <Input v-model="userName" placeholder="请输入用户名(默认admin)" style="width: 300px"></Input>
+      <div class="buttonContainer"><Button type="primary">登录</Button></div>
+    </div>
   </div>
 </template>
 <script>
