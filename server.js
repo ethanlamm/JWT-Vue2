@@ -26,7 +26,7 @@ app.get('/user', (req, res) => {
   // 在请求数据时，要加一个动画，为了测试，所以让它时间长点，加了一个定时器
   setTimeout(() => {
     res.json({
-      name: 'wangcai'
+      name: 'server-username'
     })
   }, 500)
 })
