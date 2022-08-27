@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/profile">Profile</router-link>
+      <router-link to="/" exact-active-class="active">Home</router-link> |
+      <router-link to="/login" active-class="active">Login</router-link> |
+      <router-link to="/profile" exact-active-class="active">Profile</router-link>
     </nav>
     <router-view />
   </div>
@@ -29,7 +29,7 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+nav a.active {
   color: #42b983;
 }
 </style>

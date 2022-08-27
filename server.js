@@ -32,16 +32,17 @@ app.post('/login', (req, res) => {
     // 登录成功后返回一个token
     res.json({
       code: 0,
+      msg: '登录成功',
       username: 'ethan',
       token: jwt.sign({ username: 'ethan' }, secret, {
-        expiresIn: 100 // 表示token 100s后过期
+        expiresIn: 20 // 表示token 20s后过期
       })
     })
   } else {
     // 登录失败
     res.json({
       code: 1,
-      data: '登录失败'
+      msg: '登录失败'
     })
   }
 })
@@ -49,23 +50,22 @@ app.post('/login', (req, res) => {
 // 验证token的接口
 app.get('/validate', (req, res) => {
   // 拿到前端请求时带过来的token
-  const token = req.headers.Authorization
+  const token = req.headers.authorization.split(' ')[1]
   // 验证token
-  jwt.verify(token, secret, (err, decoded) => {
-    if (err) {
-      return res.json({
-        code: 1,
-        data: 'token失效了'
-      })
-    } else {
-      // token合法，并把token时效延长
-      res.json({
-        code: 0,
-        username: decoded.username,
-        token: jwt.sign({ username: decoded.username }, secret, { expiresIn: 100 })
-      })
-    }
-  })
+  try {
+    const decoded = jwt.verify(token, secret)
+    res.send({
+      code: 0,
+      msg: 'token有效',
+      username: decoded.username,
+      token: jwt.sign({ username: decoded.username }, secret, { expiresIn: 20 })
+    })
+  } catch (error) {
+    res.send({
+      code: 1,
+      msg: 'token失效了'
+    })
+  }
 })
 
 // 配置cors中间件，解决跨域问题

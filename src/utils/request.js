@@ -12,11 +12,13 @@ instance.interceptors.request.use(
     // 打开loading效果
     store.commit('show')
 
-    // Authorization头，JWT验证
-    config.headers.Authorization = 'xxx'
+    const token = store.state.token
+    if (token && config.url === '/validate') {
+      config.headers.Authorization = `Bearer ${token}`
+    }
     return config
   }, error => {
-    return Promise.reject(error)
+    return console.log(error)
   }
 )
 
@@ -30,7 +32,7 @@ instance.interceptors.response.use(
   }, error => {
     // 关闭loading效果
     store.commit('hide')
-    return Promise.reject(error)
+    return console.log(error)
   }
 )
 

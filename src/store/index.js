@@ -10,8 +10,9 @@ export default new Vuex.Store({
   state: {
     // 定义动画
     isShowLoading: false,
-    username: 'admin',
-    token: JSON.parse(localStorage.getItem('token')) || ''
+    username: 'server-username',
+    token: JSON.parse(localStorage.getItem('token')) || '',
+    redirect: ''
   },
   getters: {
   },
@@ -39,19 +40,20 @@ export default new Vuex.Store({
       if (res.code === 0) {
         // 成功
         commit('updateUser', res)
+        return Promise.resolve(res)
       } else {
-        return Promise.reject(res.data)
+        return Promise.reject(res)
       }
     },
 
-    // 验证token
+    // 验证token，跳转至profile页面需要验证token的有效性
     async toValidate ({ commit }) {
       const res = await validate()
       if (res.code === 0) {
-        // 成功，重新更新token
         commit('updateUser', res)
+        return Promise.resolve(res)
       } else {
-        return Promise.reject(res.data)
+        return Promise.reject(res)
       }
     }
   },
