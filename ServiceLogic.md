@@ -1,5 +1,9 @@
 一、创建并启动服务器
 
+——基于`Node.js`中的`Express`框架 + `jsonwebtoken`第三方库
+
+其他方案：`koa-jwt`框架 [koa-jwt](https://www.npmjs.com/package/koa-jwt)、[Koa中间件使用之koa-jwt](https://www.jianshu.com/p/2552cdf35e66)
+
 `server.js`
 
 注意点：
@@ -15,6 +19,8 @@
   ​	2）在服务器接收时，是小写的：`req.headers.authorization`
 
 - `server.js`，该文件单独运行`run code `，不用引入到`main.js`中
+
+- 可完善：数据库、密码[md5](https://www.npmjs.com/package/md5)加密
 
 
 
