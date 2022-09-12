@@ -9,7 +9,29 @@
   </div>
 </template>
 <script>
+import { getUser } from '@/api'
+import axios from 'axios'
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  mounted () {
+    this.getData1()
+    this.getData2()
+  },
+  methods: {
+    // 通过 /api 代理请求--- vue-cli proxy 代理
+    getData1 () {
+      getUser().then(res => {
+        console.log('vue-cli proxy 代理', res)
+      }).catch(e => {})
+    },
+    // 需要服务器使用 cors 中间件
+    getData2 () {
+      axios.get('http://localhost:3000/user').then(res => {
+        console.log('服务器使用 cors 中间件', res)
+      }).catch(e => {
+        console.log(e)
+      })
+    }
+  }
 }
 </script>

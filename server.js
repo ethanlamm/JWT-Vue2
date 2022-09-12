@@ -14,6 +14,10 @@ const app = express()
 // 配置bodyparser
 app.use(bodyParser.json())
 
+// 配置cors中间件，解决跨域问题(要写在前面才生效!!!!!)
+const cors = require('cors')
+app.use(cors())
+
 // 配置接口(必须在配置cros中间件之前)
 // 获取用户信息接口
 app.get('/user', (req, res) => {
@@ -68,9 +72,7 @@ app.get('/validate', (req, res) => {
   }
 })
 
-// 配置cors中间件，解决跨域问题
-const cors = require('cors')
-app.use(cors())
-
 // 启动服务器
-app.listen(3000)
+app.listen(3000, () => {
+  console.log('服务器启动 3000')
+})
