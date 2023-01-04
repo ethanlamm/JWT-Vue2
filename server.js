@@ -32,12 +32,14 @@ app.get('/user', (req, res) => {
 // 登录接口
 app.post('/login', (req, res) => {
   const { username } = req.body
+  // 实际工作，连接数据库查询用户！
   if (username === 'ethan') {
     // 登录成功后返回一个token
     res.json({
       code: 0,
       msg: '登录成功',
       username: 'ethan',
+      // ✨颁发token✨
       token: jwt.sign({ username: 'ethan' }, secret, {
         expiresIn: 20 // 表示token 20s后过期
       })
@@ -55,13 +57,14 @@ app.post('/login', (req, res) => {
 app.get('/validate', (req, res) => {
   // 拿到前端请求时带过来的token
   const token = req.headers.authorization.split(' ')[1]
-  // 验证token
+  // ✨验证token✨
   try {
     const decoded = jwt.verify(token, secret)
     res.send({
       code: 0,
       msg: 'token有效',
       username: decoded.username,
+      // ✨验证成功后，重新签名，延长token时效，保证用户能够继续访问页面✨
       token: jwt.sign({ username: decoded.username }, secret, { expiresIn: 20 })
     })
   } catch (error) {

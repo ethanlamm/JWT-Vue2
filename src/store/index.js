@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     // 定义动画
     isShowLoading: false,
-    username: 'server-username',
+    username: 'ethan',
     token: JSON.parse(localStorage.getItem('token')) || '',
     redirect: ''
   },
