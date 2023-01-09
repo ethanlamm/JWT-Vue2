@@ -45,9 +45,9 @@ app.get('/user', (req, res) => {
 
 4.当服务器使用中间件`cors`，`vue-cli`未配置`proxy`时，请求时需要书写完整`URL`，`axios.get('http://localhost:3000/user').then(res=>{...})`才能拿到数据；
 
-5.当服务器未使用中间件`cors`，且`vue-cli`未配置`proxy`，并且是在`vue-cli 8080`项目直接请求`axios.get('http://localhost:3000/user')`时，会出现跨域问题![image-20220907113923544](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20220907113923544.png)
+5.当服务器未使用中间件`cors`，且`vue-cli`未配置`proxy`，并且是在`vue-cli 8080`项目直接请求`axios.get('http://localhost:3000/user')`时，会出现跨域问题![image-20220907113923544](https://alicloud-imgs.oss-cn-guangzhou.aliyuncs.com/img/image-20220907113923544.png)
 
-6.当`vue-cli`配置`proxy`-`/api`，而服务器未使用中间件`cors`时，使用`/api`代理的接口是正常的，但是如果直接请求`axios.get('http://localhost:3000/user')`时，会出现跨域问题![image-20220907113923544](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20220907113923544.png)
+6.当`vue-cli`配置`proxy`-`/api`，而服务器未使用中间件`cors`时，使用`/api`代理的接口是正常的，但是如果直接请求`axios.get('http://localhost:3000/user')`时，会出现跨域问题![image-20220907113923544](https://alicloud-imgs.oss-cn-guangzhou.aliyuncs.com/img/image-20220907113923544.png)
 
 正确请求`axios.get('/api/user')`
 
@@ -80,7 +80,7 @@ import request from 'request.js'
 request('/user','get').then(res=>{...})
 ```
 
-7.当`vue-cli`未配置`proxy`，但使用了`/api`，不管服务器是否使用中间件`cors`，此时请求`http://localhost:8080/api/user`这个路径，因为本地是没有这个路径的资源的，所以会报404错误![image-20220907115314202](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20220907115314202.png)
+7.当`vue-cli`未配置`proxy`，但使用了`/api`，不管服务器是否使用中间件`cors`，此时请求`http://localhost:8080/api/user`这个路径，因为本地是没有这个路径的资源的，所以会报404错误![image-20220907115314202](https://alicloud-imgs.oss-cn-guangzhou.aliyuncs.com/img/image-20220907115314202.png)
 
 8.当`vue-cli`配置`proxy`，且服务器也使用中间件`cors`时，使用`/api`代理的接口是正常的，直接请求`axios.get('http://localhost:3000/user')`也是可以的
 
